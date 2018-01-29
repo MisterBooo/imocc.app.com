@@ -236,4 +236,8 @@ return [
         'var_page'  => 'page',
         'list_rows' => 15,
     ],
+    'captcha' => [
+       'imageH' => 100,
+       'imageW' => 250
+    ],
 ];
