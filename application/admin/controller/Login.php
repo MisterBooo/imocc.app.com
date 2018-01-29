@@ -11,10 +11,20 @@ use think\Controller;
 use app\common\lib\IAuth;
 use think\Request;
 
-class Login extends Controller{
+class Login extends Base {
+
+    //防止在Base与Login之间不停的跳转
+    public function _initialize(){
+    }
 
     public function index(){
-        return $this->fetch();
+        $islogin = $this->isLogin();
+        if ($islogin){
+            //如果登录 跳转到后台首页
+            return $this->redirect('index/index');
+        }else{
+            return $this->fetch();
+        }
     }
 
     public function check(){

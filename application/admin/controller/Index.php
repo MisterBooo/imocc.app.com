@@ -3,17 +3,24 @@ namespace app\admin\controller;
 
 use  think\Controller;
 
-class Index extends Controller
+class Index extends Base
 {
+
+
     public function index()
     {
-//        halt(session(config('admin.session_user'), '', config('admin.session_user_scope')));
-        return $this->fetch();
+        $islogin = $this->isLogin();
+        //未登录
+        if (!$islogin){
+            return $this->redirect('login/index');
+        }else{
+            return $this->fetch();
+        }
+
     }
     public function welcome(){
         return 'hello world';
     }
-
 
 
 }
