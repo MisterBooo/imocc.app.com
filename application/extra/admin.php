@@ -10,6 +10,7 @@
  * session相关
  */
 return [
-    'session_adminuser' => 'adminuser',
-    'session_app_scope' => 'imooc_app_scope',
+
+    'session_user' => 'adminuser',
+    'session_user_scope' => 'imooc_app_scope',
 ];

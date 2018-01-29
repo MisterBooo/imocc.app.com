@@ -22,7 +22,9 @@ class Login extends Controller{
      if (request()->isPost()) {
 
          $data = input('post.');
-         if (!captcha_check($data['code'])) {
+         //为了不输入验证码 提高coding效率 关闭验证码
+         //正确应该是  !captcha_check($data['code'])
+         if (captcha_check($data['code'])) {
              $this->error('验证码不正确');
          } else {
 //             $this->success('通过');
@@ -52,7 +54,7 @@ class Login extends Controller{
              }
 
              // 2 session
-             session('adminuser',$user,'imooc_app_scope');
+             session(config('admin.session_user'), $user, config('admin.session_user_scope'));
              $this->success('登录成功','index/index');
 //             halt($user);
          }
@@ -61,6 +63,17 @@ class Login extends Controller{
          $this->error('请求不合法');
       }
 
+
+    }
+    /**
+     * 退出登录
+     * 清空session
+     * 跳转到登录
+     */
+    public function logout(){
+        session(null,config('admin.session_user_scope'));
+        //跳转
+        $this->redirect('login/index');
 
     }
 }
